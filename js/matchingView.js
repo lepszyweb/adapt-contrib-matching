@@ -2,128 +2,131 @@ define([
   'core/js/adapt',
   'core/js/views/questionView',
   './dropdown'
-], function(Adapt, QuestionView, DropDown) {
+], (Adapt, QuestionView, DropDown) => {
 
-  var MatchingView = QuestionView.extend({
+  class MatchingView extends QuestionView() {
 
-    dropdowns: null,
+    constructor() {
+      super();
+      this.dropdowns = [];
+    }
 
-    disableQuestion: function() {
-      this.dropdowns.forEach(function(dropdown) {
+    disableQuestion() {
+      this.dropdowns.forEach((dropdown) => {
         dropdown.toggleDisabled(true);
       });
-    },
+    }
 
-    enableQuestion: function() {
-      this.dropdowns.forEach(function(dropdown) {
+    enableQuestion() {
+      this.dropdowns.forEach((dropdown) => {
         dropdown.toggleDisabled(false);
       });
-    },
+    }
 
-    resetQuestionOnRevisit: function() {
+    resetQuestionOnRevisit() {
       this.resetQuestion();
-    },
+    }
 
-    setupQuestion: function() {
+    setupQuestion() {
       this.listenToOnce(Adapt.parentView, 'postRemove', this.onPostRemove);
       this.model.setupRandomisation();
-    },
+    }
 
-    onPostRemove: function() {
-      this.dropdowns.forEach(function(dropdown) {
+    onPostRemove() {
+      this.dropdowns.forEach((dropdown) => {
         dropdown.off('change', this.onOptionSelected);
         dropdown.destroy();
-      }, this);
-    },
+      });
+    }
 
-    onQuestionRendered: function() {
+    onQuestionRendered() {
       this.setReadyStatus();
       this.setUpDropdowns();
-    },
+    }
 
-    setUpDropdowns: function() {
+    setUpDropdowns() {
       _.bindAll(this, 'onOptionSelected');
-      this.dropdowns = [];
-      var items = this.model.get('_items');
-      this.$('.matching__item').each(function(i, el) {
-        var item = items[i];
-        var selectedOption = _.find(item._options, function(option) {
-          return option._isSelected;
-        });
-        var value = selectedOption ? selectedOption._index : null;
-        var dropdown = new DropDown({
+      const items = this.model.get('_items');
+
+      this.$('.matching__item').each((i, el) => {
+        const item = items[i];
+        const selectedOption = _.find(item._options, (option) => option._isSelected);
+
+        const value = selectedOption ? selectedOption._index : null;
+        const dropdown = new DropDown({
           el: $(el).find('.dropdown')[0],
           placeholder: this.model.get('placeholder'),
-          value: value
+          value
         });
+
         this.dropdowns.push(dropdown);
         dropdown.on('change', this.onOptionSelected);
-      }.bind(this));
+      });
       this.enableQuestion();
       if (this.model.get('_isEnabled') !== true) {
         this.disableQuestion();
       }
-    },
+    }
 
-    onCannotSubmit: function() {
-      this.dropdowns.forEach(function(dropdown) {
+    onCannotSubmit() {
+      this.dropdowns.forEach((dropdown) => {
         if (!dropdown.isEmpty()) return;
         dropdown.$el.parents('.matching__select-container').addClass('has-error');
       });
-    },
+    }
 
-    onOptionSelected: function(dropdown) {
+    onOptionSelected(dropdown) {
       if (this.model.get('_isInteractionComplete')) return;
-      var $container = dropdown.$el.parents('.matching__select-container');
+      const $container = dropdown.$el.parents('.matching__select-container');
       $container.removeClass('error');
-      var itemIndex = dropdown.$el.parents('.matching__item').index();
+      const itemIndex = dropdown.$el.parents('.matching__item').index();
       if (dropdown.isEmpty()) return;
-      var optionIndex = parseInt(dropdown.val());
+      const optionIndex = parseInt(dropdown.val(), 10);
       this.model.setOptionSelected(itemIndex, optionIndex, true);
-    },
+    }
 
-    showMarking: function() {
+    showMarking() {
       if (!this.model.get('_canShowMarking')) return;
 
-      this.model.get('_items').forEach(function(item, i) {
-        var $item = this.$('.matching__item').eq(i);
+      this.model.get('_items').forEach((item, i) => {
+        const $item = this.$('.matching__item').eq(i);
         $item.removeClass('is-correct is-incorrect').addClass(item._isCorrect ? 'is-correct' : 'is-incorrect');
       }, this);
-    },
+    }
 
-    resetQuestion: function() {
+    resetQuestion() {
       this.$('.matching__item').removeClass('is-correct is-incorrect');
       this.model.set('_isAtLeastOneCorrectSelection', false);
-      var resetAll = this.model.get('_shouldResetAllAnswers');
+      const resetAll = this.model.get('_shouldResetAllAnswers');
 
-      this.model.get('_items').forEach(function(item, index) {
+      this.model.get('_items').forEach((item, index) => {
         if (item._isCorrect && resetAll === false) return;
         this.selectValue(index, null);
-        item._options.forEach(function(option, index) {
+        item._options.forEach((option, index) => {
           option._isSelected = false;
         });
         item._selected = null;
-      }, this);
-    },
+      });
+    }
 
-    showCorrectAnswer: function() {
-      this.model.get('_items').forEach(function(item, index) {
-        var correctOption = _.findWhere(item._options, { _isCorrect: true });
+    showCorrectAnswer() {
+      this.model.get('_items').forEach((item, index) => {
+        const correctOption = _.findWhere(item._options, { _isCorrect: true });
         this.selectValue(index, correctOption._index);
-      }, this);
-    },
+      });
+    }
 
-    hideCorrectAnswer: function() {
-      var answerArray = this.model.has('_tempUserAnswer') ?
-        this.model.get('_tempUserAnswer') :
-        this.model.get('_userAnswer');
+    hideCorrectAnswer() {
+      const answerArray = this.model.has('_tempUserAnswer')
+        ? this.model.get('_tempUserAnswer')
+        : this.model.get('_userAnswer');
 
-      this.model.get('_items').forEach(function (item, index) {
-        var key = answerArray[index];
-        var value = item._options[key]._index;
+      this.model.get('_items').forEach((item, index) => {
+        const key = answerArray[index];
+        const value = item._options[key]._index;
         this.selectValue(index, value);
-      }, this);
-    },
+      });
+    }
 
     /**
      * Sets the selected item of a dropdown
@@ -133,14 +136,14 @@ define([
      * // Sets the third dropdown to option _index 1
      * this.selectValue(2, 1);
      */
-    selectValue: function(index, optionIndex) {
+    selectValue(index, optionIndex) {
       if (!this.dropdowns) return;
-      var dropdown = this.dropdowns[index];
+      const dropdown = this.dropdowns[index];
       if (!dropdown) return;
       dropdown.select(optionIndex);
     }
 
-  });
+  }
 
   return MatchingView;
 });
