@@ -1,5 +1,5 @@
 define([
-  '.dropdownOption'
+  './dropdownOption'
 ], (DropDownOption) => {
 
   class DropDown extends Backbone.View() {
