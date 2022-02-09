@@ -18,8 +18,8 @@
               "properties": {
                 "ariaRegion": {
                   "type": "string",
-                  "title": "ARIA region",
-                  "default": "Matching. Select from lists and then submit.",
+                  "title": "Region ARIA",
+                  "default": "Dopasowywanie. Wybierz z listy, a następnie wyślij.",
                   "_adapt": {
                     "translatable": true
                   }

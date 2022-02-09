@@ -14,7 +14,7 @@
       "properties": {
         "_supportedLayout": {
           "type": "string",
-          "title": "Supported layout",
+          "title": "Obsługiwany układ",
           "default": "half-width",
           "enum": [
             "full-width",
@@ -27,7 +27,7 @@
         },
         "instruction": {
           "type": "string",
-          "title": "Instruction",
+          "title": "Instrukcja",
           "default": "",
           "_adapt": {
             "translatable": true
@@ -35,59 +35,59 @@
         },
         "_attempts": {
           "type": "number",
-          "title": "Allowed attempts",
-          "description": "How many attempts the learner is allowed",
+          "title": "Dozwolone próby",
+          "description": "Ile prób może wykonać uczeń",
           "default": 1
         },
         "_canShowModelAnswer": {
           "type": "boolean",
-          "title": "Enable correct answer toggle",
-          "description": "Allow the user to view the 'model answer' if they answer the question incorrectly",
+          "title": "Włącz przełącznik poprawnej odpowiedzi",
+          "description": "Umożliwienie użytkownikowi obejrzenia 'modelowej odpowiedzi', jeśli odpowie na pytanie niepoprawnie",
           "default": true
         },
         "_canShowFeedback": {
           "type": "boolean",
-          "title": "Enable feedback",
+          "title": "Włącz informacje zwrotne",
           "default": true
         },
         "_canShowMarking": {
           "type": "boolean",
-          "title": "Enable marking",
+          "title": "Włącz znakowanie",
           "default": true
         },
         "_shouldResetAllAnswers": {
           "type": "boolean",
-          "title": "Reset correct answers between attempts",
-          "description": "Controls whether all - or just incorrect - answers should be reset when the question is reset",
+          "title": "Resetowanie poprawnych odpowiedzi pomiędzy próbami",
+          "description": "Kontroluje, czy wszystkie - lub tylko błędne - odpowiedzi powinny być resetowane, gdy pytanie jest resetowane",
           "default": true
         },
         "_shouldDisplayAttempts": {
           "type": "boolean",
-          "title": "Show number of remaining attempts",
+          "title": "Pokaż liczbę pozostałych prób",
           "default": false
         },
         "_isRandom": {
           "type": "boolean",
-          "title": "Randomise answers",
+          "title": "Losuj odpowiedzi",
           "default": false
         },
         "_questionWeight": {
           "type": "number",
-          "title": "Question weight",
-          "description": "How much this question is worth",
+          "title": "Waga pytania",
+          "description": "Ile warte jest to pytanie",
           "default": 1
         },
         "_recordInteraction": {
           "type": "boolean",
-          "title": "Record interaction",
-          "description": "If disabled, recording the user's answer(s) to this question to cmi.interactions on the LMS will be disabled for this component only",
+          "title": "Zapisywanie interakcji",
+          "description": "Jeśli wyłączone, nagrywanie odpowiedzi użytkownika na to pytanie do cmi.interactions w LMS będzie wyłączone tylko dla tego komponentu",
           "default": true
         },
         "placeholder": {
           "type": "string",
-          "title": "Placeholder",
-          "description": "Text that will be displayed at the top of each list of options",
-          "default": "Please select an option",
+          "title": "Tekst zastępczy",
+          "description": "Tekst, który będzie wyświetlany na górze każdej listy opcji",
+          "default": "Proszę wybrać opcję",
           "_adapt": {
             "translatable": true
           }
@@ -100,7 +100,7 @@
             "properties": {
               "text": {
                 "type": "string",
-                "title": "Text",
+                "title": "Tekst",
                 "description": "Title text displayed above the matching option",
                 "default": "",
                 "_adapt": {
@@ -109,14 +109,14 @@
               },
               "_options": {
                 "type": "array",
-                "title": "Options",
+                "title": "Opcje",
                 "items": {
                   "type": "object",
                   "properties": {
                     "text": {
                       "type": "string",
-                      "title": "Text",
-                      "description": "Option text",
+                      "title": "Tekst",
+                      "description": "Tekst opcji",
                       "default": "",
                       "_adapt": {
                         "translatable": true
@@ -124,7 +124,7 @@
                     },
                     "_isCorrect": {
                       "type": "boolean",
-                      "title": "Mark this option as correct",
+                      "title": "Zaznacz tę opcję jako prawidłową",
                       "default": false
                     }
                   }
@@ -140,8 +140,8 @@
           "properties": {
             "title": {
               "type": "string",
-              "title": "Title",
-              "description": "Leave blank to have the component's title shown instead",
+              "title": "Tytuł",
+              "description": "Pozostaw puste, aby zamiast tytułu wyświetlany był tytuł komponentu",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -149,8 +149,8 @@
             },
             "correct": {
               "type": "string",
-              "title": "Correct feedback",
-              "description": "Correct answer feedback for this question",
+              "title": "Domyślna informacja zwrotna o poprawnej odpowiedzi",
+              "description": "Informacje zwrotne dotyczące prawidłowych odpowiedzi dla tego pytania",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -159,13 +159,13 @@
             },
             "_incorrect": {
               "type": "object",
-              "title": "Incorrect",
+              "title": "Niepoprawne",
               "default": {},
               "properties": {
                 "final": {
                   "type": "string",
-                  "title": "Default incorrect feedback",
-                  "description": "Incorrect answer feedback for the final attempt",
+                  "title": "Domyślna informacja zwrotna o niepoprawnej odpowiedzi",
+                  "description": "Informacje zwrotne dotyczące błędnych odpowiedzi przy próbie końcowej",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -174,8 +174,8 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Retry feedback",
-                  "description": "Incorrect answer feedback for any attempt apart from the last attempt. If you leave this blank, the default incorrect feedback will be used instead",
+                  "title": "Informacja zwrotna dotycząca ponawiania prób",
+                  "description": "Informacja zwrotna o błędnej odpowiedzi dla każdej próby z wyjątkiem ostatniej próby. Jeśli pozostawisz to pole puste, domyślna informacja zwrotna o błędnej odpowiedzi zostanie użyta zamiast niej.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -186,13 +186,13 @@
             },
             "_partlyCorrect": {
               "type": "object",
-              "title": "Partly correct",
+              "title": "Częściowo poprawne",
               "default": {},
               "properties": {
                 "final": {
                   "type": "string",
-                  "title": "Default partly correct feedback",
-                  "description": "Partly correct answer feedback for the final attempt. If you leave this blank, the default incorrect feedback will be used instead",
+                  "title": "Informacja zwrotna o częściowo poprawnej odpowiedzi",
+                  "description": "Częściowo poprawne odpowiedź zwrotna dla ostatniej próby. Jeśli pozostawisz to pole puste, domyślna informacja zwrotna o niepoprawnej odpowiedzi zostanie użyta zamiast niej.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -201,8 +201,8 @@
                 },
                 "notFinal": {
                   "type": "string",
-                  "title": "Retry feedback",
-                  "description": "Partly correct answer feedback for any attempt apart from the last attempt. If you leave this blank, the default partly correct feedback will be used instead",
+                  "title": "Informacja zwrotna dotycząca ponawiania prób",
+                  "description": "Częściowo poprawne odpowiedź zwrotna za każdą próbę z wyjątkiem ostatniej próby. Jeśli pozostawisz to pole puste, zamiast tego użyta zostanie Informacja zwrotna o częściowo poprawnej odpowiedzi.",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -215,17 +215,17 @@
         },
         "_buttons": {
           "type": "object",
-          "title": "Button overrides",
+          "title": "Nadpisywanie przycisków",
           "default": {},
           "properties": {
             "_submit": {
               "type": "object",
-              "title": "Submit",
+              "title": "Wyślij",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
-                  "title": "Button text",
+                  "title": "Tekst przycisku",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -233,7 +233,7 @@
                 },
                 "ariaLabel": {
                   "type": "string",
-                  "title": "ARIA label",
+                  "title": "Etykieta ARIA",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -243,12 +243,12 @@
             },
             "_reset": {
               "type": "object",
-              "title": "Reset",
+              "title": "Wyzeru",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
-                  "title": "Button text",
+                  "title": "Tekst przycisku",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -256,7 +256,7 @@
                 },
                 "ariaLabel": {
                   "type": "string",
-                  "title": "ARIA label",
+                  "title": "Etykieta ARIA",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -266,12 +266,12 @@
             },
             "_showCorrectAnswer": {
               "type": "object",
-              "title": "Show correct answer",
+              "title": "Pokaż poprawną odpowiedź",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
-                  "title": "Button text",
+                  "title": "Tekst przycisku",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -279,7 +279,7 @@
                 },
                 "ariaLabel": {
                   "type": "string",
-                  "title": "ARIA label",
+                  "title": "Etykieta ARIA",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -289,12 +289,12 @@
             },
             "_hideCorrectAnswer": {
               "type": "object",
-              "title": "Hide correct answer",
+              "title": "Ukryj poprawną odpowiedź",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
-                  "title": "Button text",
+                  "title": "Tekst przycisku",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -302,7 +302,7 @@
                 },
                 "ariaLabel": {
                   "type": "string",
-                  "title": "ARIA label",
+                  "title": "Etykieta ARIA",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -312,12 +312,12 @@
             },
             "_showFeedback": {
               "type": "object",
-              "title": "Show feedback",
+              "title": "Pokaż informację zwrotną",
               "default": {},
               "properties": {
                 "buttonText": {
                   "type": "string",
-                  "title": "Button text",
+                  "title": "Tekst przycisku",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -325,7 +325,7 @@
                 },
                 "ariaLabel": {
                   "type": "string",
-                  "title": "ARIA label",
+                  "title": "Etykieta ARIA",
                   "default": "",
                   "_adapt": {
                     "translatable": true
@@ -335,7 +335,7 @@
             },
             "remainingAttemptsText": {
               "type": "string",
-              "title": "Remaining attempts label",
+              "title": "Etykieta pozostałych prób",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -343,7 +343,7 @@
             },
             "remainingAttemptText": {
               "type": "string",
-              "title": "Final attempt label",
+              "title": "Etykieta próby końcowej",
               "default": "",
               "_adapt": {
                 "translatable": true
