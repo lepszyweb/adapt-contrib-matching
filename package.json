@@ -3,7 +3,7 @@
   "version": "6.0.0",
   "framework": ">=5.18.0",
   "homepage": "https://github.com/lepszyweb/adapt-contrib-matching",
-  "bugs": "https://github.com/alepszyweb/adapt-contrib-matching/issues",
+  "bugs": "https://github.com/lepszyweb/adapt-contrib-matching/issues",
   "component" : "matching",
   "targetAttribute": "_matching",
   "displayName" : "Matching Question",
